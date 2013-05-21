@@ -13,7 +13,6 @@
 
 // $content = retrieve_content($npage,1,$preview,'FULL');
 function retrieve_ids($site_id) {
-  return -1;
   global $db;
   if(!$site_id) {
     return -1;
@@ -29,12 +28,10 @@ function retrieve_ids($site_id) {
   $results = $db->prepare($SQL);
   $results->execute(array('site' => $site_id));
 
-  return $results; // $row = $results->fetch(); <- wrap in a while for all rows
+  return $results;
 }
 function lookup_story_by_id($article) {
   global $db;
-    return -1;
-  // $article = $content_id; 
  
   $SQL = "SELECT article_id, headline, subhead, body, author_name, author_title,
                  date_format(date_stamp,'%M %D, %Y') as date, hasPhoto
@@ -58,36 +55,26 @@ function retrieve_content($site_id,$section_name) {
             FROM site_content
            WHERE site_id= :site
              AND section_name= :section
-             AND isActive = :active
+             AND isActive = 1
         ORDER BY publish_date DESC
            LIMIT 1";
 
-  // PDO Option
-  // $result = $db->query($SQL);
-  // $result->setFetchMode(PDO::FETCH_CLASS, 'User');
-  // while($user = $result->fetch()) {
-  //   $user->full_name();
-  // }
-
   $results = $db->prepare($SQL);
-  $results->execute(array(':site' => $site_id, ':section' => $section_name, ':active' => 1));
-  $results->setFetchMode(PDO::FETCH_CLASS, 'User');
+  $results->execute(array(':site' => $site_id, ':section' => $section_name));
 
-  $data = $results->fetch();
-  echo "data contains: [" . $data . "]\n";
-  print_r($data);
+  $data = $results->fetch(PDO::FETCH_OBJ);
 
   $article = $data->content_id; 
  
   $SQL = "SELECT article_id, headline, subhead, body, author_name, author_title,
                  date_format(date_stamp,'%M %D, %Y') as date, hasPhoto
             FROM content
-           WHERE article_id = .article
+           WHERE article_id = :article
              AND status=6
              AND isActive=1";
 
   $results = $db->prepare($SQL);
-  $results->execute(array('article' => $article));
+  $results->execute(array(':article' => $article));
   return($results);
   
 }
@@ -97,21 +84,21 @@ function get_photos($article_id) {
   if(!$article_id) {
     return -1;
   }
-  return -1;
   $SQL = "SELECT path,photo_group_id,cutline,photoby,width,height
             FROM webphoto
-           WHERE article_id=$article_id
+           WHERE article_id= :article
              AND isActive = 1
         ORDER BY photo_id ASC";
 
-  $results = $db->query($SQL);
+  $results = $db->prepare($SQL);
+
+  $results->execute(array(':article' => $article_id));
   return($results);
 }
 
 function _retrieve_content($section,$number,$preview,$style) {
   global $db;
 
-  return -1;
   if(!$section) {
     $section = 1;
   }
@@ -137,13 +124,15 @@ function _retrieve_content($section,$number,$preview,$style) {
  
   $switchsql = "SELECT article_id, hasPhoto
                   FROM content
-                 WHERE section_id='$section'
+                 WHERE section_id= :section
                    AND isActive=$isActive
               ORDER BY date_stamp DESC
                  LIMIT $num_of_items";
 
-  $switchresults = $db->query($switchsql); 
-  $dataswitch = $switchresults->fetchRow();
+  $switchresults = $db->prepare($switchsql);
+  $switchresults->execute(array(':section' => $section));
+  $dataswitch = $switchresults->fetch(PDO::FETCH_OBJ);
+
   $article = $dataswitch->article_id;
   $switch = $dataswitch->hasPhoto;
 
@@ -159,9 +148,9 @@ function _retrieve_content($section,$number,$preview,$style) {
                    user as d
              WHERE a.author_id=b.user_id
                AND a.article_id=c.article_id
-               AND a.article_id=$article
+               AND a.article_id= :article
                AND c.photoby=d.user_id
-               AND a.section_id='$section'
+               AND a.section_id= :section
                AND a.isActive=$isActive
                AND c.isActive=1
           ORDER BY a.date_stamp
@@ -173,14 +162,16 @@ function _retrieve_content($section,$number,$preview,$style) {
                    b.real_name as byline, b.title as authortitle
               FROM content as a, user as b
              WHERE a.author_id=b.user_id
-               AND a.article_id=$article
-               AND a.section_id='$section'
+               AND a.article_id= :article
+               AND a.section_id= :section
                AND a.isActive=$isActive
           ORDER BY a.date_stamp
              LIMIT $num_of_items";
   }
   // echo $sql;
-  $results = $db->query($sql); 
+  // $results = $db->query($sql); 
+  $results = $db->prepare($sql);
+  $results->execute(array(':article' => $article, ':section' => $section));
 
   return $results;
   //while($data = $results->fetchRow()) {
@@ -201,7 +192,6 @@ function _retrieve_content($section,$number,$preview,$style) {
 function generate_nav() {
   global $db;
   
-  return -1;
   $sql = "SELECT distinct(title),
                  section_id,
                  ext_url,
@@ -211,9 +201,11 @@ function generate_nav() {
            WHERE isactive=1
         ORDER BY roworder";
 
-  $results = $db->query($sql);
+  // $results = $db->query($sql);
+  $results = $db->prepare($sql);
+  $results->execute();
 
-  while($data = $results->fetchRow()) {
+  while($data = $results->fetch(PDO::FETCH_OBJ)) {
     $section   = $data->title;
     $sectionid = $data->section_id;
     $url   = $data->ext_url;
@@ -257,7 +249,6 @@ function samplecode() {
 }
 
 function getClassbyID($id){
-  return -1;
  switch($id) {
    case '085':
    $title = "Publisher's Notice";
