@@ -2,19 +2,19 @@
 <?php
  $content = retrieve_content($site,$section);
  unset($data);
- while($data = $content->fetch()) {
-    $article_id = $data->article_id;
-    $headline = $data->headline;
-    $subhead = $data->subhead;
-    $story = $data->body;
-    $author_name = $data->author_name;
-    $author_title = $data->author_title;
-    $hasPhoto = $data->hasPhoto;
+ while($data = $content->fetch(PDO::FETCH_OBJ)) {
+   $article_id = $data->article_id;
+   $headline = $data->headline;
+   $subhead = $data->subhead;
+   $story = $data->body;
+   $author_name = $data->author_name;
+   $author_title = $data->author_title;
+   $hasPhoto = $data->hasPhoto;
  }
  if($hasPhoto) {
     $photo = get_photos($article_id);
 
-    $data = $photo->fetch();
+    $data = $photo->fetch(PDO::FETCH_OBJ);
        $path = $data->path;
        $group_id = $data->photo_group_id;
        $cutline = $data->cutline;
