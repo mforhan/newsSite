@@ -1,0 +1,1 @@
+   <a href="news.php">News</a> | <a href="sports.php">Sports &amp; Outdoors</a> | <a href="community.php">Community</a> | <a href="class.php">Classifieds</a> | <a href="about.php">About Us</a> | <a href="advert.php">Advertising</a> | <a href="subscribe.php">Subscribe</a>

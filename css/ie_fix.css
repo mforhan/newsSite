@@ -1,0 +1,184 @@
+html {
+ height:100%;
+}
+body {
+ height:100%;
+}
+#topCol {
+ background:url('graphics/new_chelan_logo.jpg');
+ text-align:center;
+ border-top:1px solid black;
+ border-left:1px solid black;
+ border-right:1px solid black;
+ width:798px;
+ height:100px;
+ overflow:hidden;
+}
+#topCol .nav {
+ float:right;
+ color:white;
+ font:12pt Times;
+ position:relative;
+ top:-25px;
+ margin:0;
+ padding-right:10px;
+ /* border:1px solid orange; */
+}
+#topCol .nav a {
+ text-decoration:none;
+ color:#222;
+}
+html>body #topCol .nav {
+ top:-21px;
+}
+<!--[if lte IE 6]>
+  /* Core of IE Hacks : www.maratz.com/blog/2005/06/16/essentials */
+  <link rel="stylesheet" type="text/css" href="ie_hacks.css" />
+<![ endif] -->
+#nav {
+ background:#bbb;
+ color:#fff;
+ border-top:1px solid black;
+ border-left:1px solid black;
+ border-right:1px solid black;
+ width:786px;
+ height:20px;
+ padding:2px;
+ padding-top:3px;
+ padding-bottom:0px;
+ padding-left:10px;
+}
+#nav a {
+ text-decoration:none;
+ color:#222;
+}
+#content {
+ position:relative;
+ /* border:1px solid #ccf;
+ border-left:1px solid black;
+ border-right:1px solid black; */
+ border:1px solid black;
+ width:788px;
+ min-height:100%;
+ /* background:#c0f5df; */
+ /* background:#ccf0de; */
+ background:#b5dee8;
+ padding-left:10px;
+ padding-bottom:0px;
+ overflow:hidden;
+}
+/* IE specific hack */
+* html #container {
+height:100%;
+}
+#content h1 {
+ margin-top:10px;
+}
+#content h3 {
+ font:10pt Verdana;
+ font-weight:bold;
+ width:565px;
+ border-left:1px solid black;
+ border-bottom:1px solid black;
+ background-color:#aad;
+ padding-left:5px;
+ padding-bottom:2px;
+ padding-top:2px;
+}
+#content h4 {
+ font:10pt Verdana;
+ font-style:italic;
+ font-weight:bold;
+}
+#content h6 a {
+ text-decoration:none;
+}
+#content p {
+ font:10pt Georgia;
+}
+#content p.byline {
+  color:#444;
+  margin:0px;
+}
+#content #photo {
+  float:right;
+  background:#eee;
+  width:250px;
+  border:1px solid black;
+  padding:5px;
+  margin:10px;
+  margin-top:0px;
+  margin-right:0px;
+}
+#content #photo img {
+  border:1px solid black;
+}
+#content #photo p {
+  padding:0px;
+  margin:0px;
+  padding-left:2px;
+  font:8pt Verdana;
+}
+#content #photo p.byline {
+  text-align:right;
+  color:#444;
+}
+#content #photo h1 {
+  padding:0px;
+  margin:0px;
+  font:12pt Verdana;
+}
+#content #adverts {
+ float:right;
+ margin-left:10px;
+ background:#009dbb;
+ width:200px;
+ height:500px;
+ border-left:1px solid black;
+}
+#content #adverts .ad {
+ margin-left:auto;
+ margin-right:auto;
+ width:175px;
+ border:1px solid #eee;
+ background:#ccc;
+ margin-top:10px;
+}
+#content #adverts .ad h1 {
+ font:10pt Verdana;
+ color:#222;
+ font-weight:bold;
+ text-align:center;
+}
+#content #adverts .ad p {
+ text-align:center;
+ font:8pt Verdana;
+ color:#444;
+ margin:10px;
+}
+#content #adverts .ad p.link {
+ text-align:right;
+}
+#footer {
+ background:#bbb;
+ border-left:1px solid black;
+ border-right:1px solid black;
+ border-bottom:1px solid black;
+ width:786px;
+ height:20px;
+ padding:2px;
+ padding-left:10px;
+}
+#footer p {
+ font:8pt/10pt Verdana;
+ text-align:center;
+ color:#222;
+ margin-top:0px;
+ padding-top:3px;
+}
+#valid {
+ margin:10px;
+}
+#valid img {
+ text-decoration:none;
+}

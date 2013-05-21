@@ -1,0 +1,287 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+      <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+ <head>
+  <title>A classified ad</title>
+  <link rel="stylesheet" href="" type="text/css"/>
+<script type="text/javascript">
+var colOneHeight;
+var colTwoHeight;
+var colTreHeight;
+
+function init() {
+  resize = setInterval('splitCol()',1500);
+}
+function displayHeight() {
+ elem = document.getElementById('helpwanted');
+ height = elem.offsetHeight;
+ alert('element is '+height+' tall');
+}
+// function resort(startCol,sColMax,endCol) {
+  // This function takes a column, a max height and another col name
+  // it calculates the height of the column and moves all excess entries to
+  // the second col.
+function resort() {
+  startCol = document.getElementById('helpwanted');
+  // endCol = document.getElementById('col_02');
+  sColMax = 100;
+  curHeight = startCol.offsetHeight;
+  if(curHeight > sColMax) {
+    for (var i = 0; i < startCol.childNodes.length; i++) {
+      if (startCol.childNodes[i].nodeType == document.ELEMENT_NODE) {
+        // operate on an element
+        if(startCol.childNodes[i].id.match(/ad_\d+/)) {
+          alert(startCol.childNodes[i].id);
+        }
+      }
+    }
+  } else {
+    return
+  }
+}
+function getSizes() {
+ colOne = document.getElementById('helpwanted');
+ myStr = "";
+
+ for (var i = 0; i < colOne.childNodes.length; i++) {
+   if (colOne.childNodes[i].nodeType == document.ELEMENT_NODE) {
+     // operate on an element
+     if(colOne.childNodes[i].id.match(/ad_\d+/)) {
+       curElem = colOne.childNodes[i];
+       myStr += "["+curElem.id+"] ["+curElem.offsetHeight+"]\n";
+     }
+   }
+ }
+ alert(myStr);
+}
+function splitCol() {
+ colOne = document.getElementById('helpwanted');
+ colTwo = document.getElementById('col_02');
+ colTre = document.getElementById('col_03');
+ colHeight = colOne.offsetHeight;
+ // alert('height ['+colHeight+']');
+ if(colHeight > 1000) { 
+   for(loopCount = 30;loopCount > 1;loopCount--) {
+    // alert ("count ["+loopCount+"]");
+    if(loopCount < 10) {
+      padCount = '0'+loopCount;
+    } else {
+      padCount = loopCount;
+    }
+    curElem = document.getElementById('ad_'+padCount);
+    if(curElem) {
+      colTwo.appendChild(curElem);
+      colHeight = colOne.offsetHeight;
+      if(colHeight <= 1000) {
+        return;
+      }
+    } else {
+      // return;
+      continue;
+    }
+   }
+ }
+ // splitElem = document.getElementById('ad_08');
+ // alert("Calling split "+splitElem);
+ //pNode = document.getElementById('col_02');
+ //pNode.appendChild(splitElem);
+ // splitElem.style = "float:right;";
+ clearInterval(resize);
+}
+// window.onLoad = init();
+</script>
+<style type="text/css">
+#container {
+  width:90%;
+  min-width:400px;
+  border:1px solid gray;
+  margin:5%;
+  padding:0px 10px;
+}
+#container .section {
+  width:150px;
+  margin-right:10px;
+}
+#container .section h1 {
+  display:block;
+  color:#fff;
+  background-color:#000;
+  padding-left:10px;
+  padding-top:5px;
+  padding-bottom:2px;
+  font-size:12pt;
+  margin-bottom:2px;
+}
+#container .section .border {
+  border:1px solid black;
+  width:148px;
+}
+#container .section .ad {
+  width:150px;
+  border-bottom:1px solid black;
+}
+#container .section .border p {
+  font-family:Helvetica,sans-serif;
+  font-size:8pt;
+  text-align:justify;
+  margin:0;
+  padding:2px;
+}
+#container .section .ad p {
+  font-family:Helvetica,sans-serif;
+  font-size:8pt;
+  text-align:justify;
+  margin:0;
+  padding:2px;
+}
+#container .section .border ul li {
+  font-family:Helvetica,sans-serif;
+  font-size:8pt;
+}
+#container .section .ad ul li {
+  font-family:Helvetica,sans-serif;
+  font-size:8pt;
+}
+em {
+  font-weight:bold;
+  font-style:normal;
+}
+</style>
+ </head>
+ <body>
+  <div id="container">
+   <!--<input type="button" onClick="displayHeight();" value="height">-->
+    <!--<input type="button" value="sizes" onClick="getSizes();">
+    <input type="button" value="elements" onClick="resort();">-->
+   <div class="section" id="col_01" style="float:left;">
+    <h1>Help Wanted</h1>
+    <div class="border" id="ad_01">
+<p><em>CASCADE MEDICAL CENTER JOB OPPORTUNITIES</em></p>
+<ul>
+ <li>RN full time- nights</li>
+ <li>PT/ PTA</li>
+ <li>Medical Assistant/ LPN</li>
+</ul>
+<p>Volunteer Opportunities are also available. Apply at www.cascademedicalcenter.org EOE.</p>
+    </div>
+    <div class="ad" id="ad_02">
+<p>Accepting applications for wait staff, full or part-time. Apply in person at Pavz. 833 Front St. in Leavenworth.</p>
+    </div>
+    <div class="ad" id="ad_03">
+<p>Apprentice coffee roaster/ packager needed. 21 or older preferred, 5 shifts/ week, Alpine Coffee Roasters, 509-548-3313.</p>
+    </div>
+    <div class="ad" id="ad_04">
+<p>Are you responsible, honest, trust worthy, reliable? We are a family with three boys looking for a babysitter to help out on occassion. Able to drive is preferred. Call 509-630-0886.</p>
+    </div>
+    <div class="ad" id="ad_05">
+<p><em>Breakfast Servers and Housekeepers</em></p>
+<p>needed full and part time competitive wage, weekend pay differential. Employees enjoy a positive working
+environment, recreation privileges including indoor
+pool/ spa and workout room. Apply in person, Enzian Inn, Leavenworth 590 Hwy 2.</p>
+    </div>
+    <div class="ad" id="ad_06">
+<p>Café & Hotel in Skykomish seeking Cook or waitperson. Potential for management; compensation DOE.
+Call Henry, 425-293-1937</p>
+    </div>
+    <div class="ad" id="ad_07">
+<p><em>Energy Technology</em></p>
+<p>Entry-level and pre-apprenticeship training for jobs in the electric utility industry is now available through Wenatchee Valley College. Start the new energy technology program this fall.
+Call 509.687.6847.</p>
+<p>Kathi Rivers Shannon</p>
+<p>Executive Director of College and Community Relations Wenatchee Valley College 1300 Fifth Street
+Wenatchee, WA  98801 Phone 509.682.6420</p>
+<p>E-mail krshannon@wvc.edu.</p>
+    </div>
+    <div class="ad" id="ad_08">
+<p><em>Automotive Repair</em></p>
+<p>Want a job repairing automobiles? Get the training you need through Wenatchee Valley College. Shop Procedures, Electrical Systems, Engine Repair, Engine Performance and Technical Reading offered in Wenatchee this fall. Contact 509.682.6610 for help getting started.</p>
+    </div>
+    <div class="ad" id="ad_09">
+<p><em>Building Technology</em></p>
+<p>Our valley is in a construction boom. Get skills for entry into carpentry-related construction occupations through Wenatchee Valley College. This fall learn Construction Core and Concrete Construction. Move on to Framing Systems and Exterior Finish/Trim in the winter, and Interior Finish/Trim and Construction Specialties in spring. You may enroll any quarter. Contact 509.682.6610 for help getting started.</p>
+    </div>
+   </div>
+   <div class="section" id="col_02" style="float:left;">
+    <h1>Help Wanted</h1>
+    <div class="ad" id="ad_10">
+<p><em>Environmental Systems Refrigeration Technology</em></p>
+<p>Training in this field can lead to a high-paying job. Heating, ventilation, air conditioning and refrigeration for residential, commercial and industrial. Start classes at Wenatchee Valley College this fall to prepare for a variety of entry-level jobs. Contact 509.682.6610 for help getting started.</p>
+    </div>
+    <div class="ad" id="ad_11">
+<p><em>Drafting Technician</em></p>
+<p>Wenatchee Valley College is now offering a drafting technology certificate, starting with Introduction to Graphics and Blueprints (ENGR 102) and Computer Applications (BIT 105) evening classes this fall. Contact 509.682.6847 for help getting started or see our Web site at www.wvc.edu.</p>
+    </div>
+    <div class="ad" id="ad_12">
+<p><em>Food Service Director</em></p>
+<p>Mountain Meadows Assisted Living is seeking an experienced cook to oversee the total operations of the dietary department. Qualified person must be able to prepare food for a large volume of people including Meals on Wheels in the Leavenworth-Cashmere area. Responsibilities include food preparation, ordering, budget management, and total oversight of dietary services. If interested apply at Mountain Meadows, 320 Park Ave., Leavenworth. For more information, contact Nate at 509-548-4076.</p>
+    </div>
+    <div class="ad" id="ad_13">
+<p>Hiring immediately for Kitchen Position. Wages depending on experience. Pick up application at Gustav’s in Leavenworth. No phone calls please.</p>
+    </div>
+    <div class="ad" id="ad_14">
+<p>Housekeeping and Laundry personnel needed. Come and join the best housekeeping team in Leavenworth. Ask for an application at Best Western Icicle Inn, Front Desk 505 Hwy 2.</p>
+    </div>
+    <div class="ad" id="ad_15">
+<p><em>Houskeeping</em> for Alps Romance Suites- $12/ per suite. Reliable and detail oriented. References needed. 509-548-0918.</p>
+    </div>
+    <div class="ad" id="ad_16">
+<p><em>Mountain Meadows</em></p>
+<p><em>Assisted Living</em></p>
+<p>Come join our fabulous team. We are currently seeking a care giver who enjoys the elderly and desires to work in a great team environment. Applications accepted at Mountain Meadows, 320 Park Avenue, Leavenworth, Wa. (509)548-4076.</p>
+    </div>
+    <div class="ad" id="ad_17">
+<p>Need Some Cash?</p>
+<p>The Cashmere Valley Record is looking for a few talented individuals to sell subscriptions door to door. High commission rate will reward producers with high pay.Excellent fund raising event for youth groups or civic organizations. Call Bill Forhan at 548-5286 to discuss this opportunity.</p>
+    </div>
+    <div class="ad" id="ad_18">
+<p>New shop looking for a part time employee. Must be 18 or older. Responsible and reliable. Able to work evenings and weekends. Call 509-548-5240 for interview.</p>
+    </div>
+    <div class="ad" id="ad_19">
+<p>Obertal Inn is seeking a part time maintenance person. This job is perfect for someone who has another part time job or is looking for extra spending money.</p>
+<p>Tasks will included hot tub maintenance, snow removal, light plumbing and electrical.</p>
+<p>Competitive wage. Please apply in person at 922 Commercial St. in Leavenworth.</p>
+    </div>
+   </div>
+   <div class="section" id="col_03" style="float:left;">
+    <h1>Help Wanted</h1>
+    <div class="ad" id="ad_20">
+<p>Part time housekeeping - with no phone calls. Apply in person Weekends are a must Background check and no drugs. 7335 Hwy 2, Cashmere, Wa.98815.</p>
+    </div>
+    <div class="ad" id="ad_21">
+<p><em>PETROLEUM TRANSPORT DRIVERS NEEDED</em> CDL, safe operator, clean driving record, non tobacco user preferred. To obtain an application contact Randy at 509-682-2221 ext. 12 or e-mail transport@greenpetro.com or get an application at our web site www.greenpetro.com &lt;http://www.greenpetro.com&gt;</p>
+    </div>
+    <div class="ad" id="ad_22">
+<p><em>Business and Computers</em></p>
+<p>Interested in a business or computer technology career in such fields as communications, finance, marketing, management, accounting, network administration, or software development? Take a class or two or start your one-year certificate or two-year degree this fall at Wenatchee Valley College. Contact 509.682.6610.</p>
+    </div>
+    <div class="ad" id="ad_23">
+<p><em>Educational Sign</em></p>
+<p><em>Language Interpreter</em></p>
+<p>Work as a school sign language interpreter. Get your training through Wenatchee Valley College’s nine-quarter program offered in the evening during the week and occasional Saturdays. Contact Eva at 509.682.6633.</p>
+    </div>
+    <div class="ad" id="ad_24">
+<p><em>Health Care</em></p>
+<p>Train to become a nurse, nursing assistant, medical assistant, X-ray technician, medical lab technician, emergency medical technician or chemical dependency professional. Start your path toward a new health care career at Wenatchee Valley College this fall. Contact 509.682.6844 in Wenatchee or 509.422.7952 in Omak for help getting started.</p>
+    </div>
+    <div class="ad" id="ad_25">
+<p><em>Agriculture</em></p>
+<p>General agriculture programs; a sustainable/ organic fruit production program with a four-year option of tree fruit management with WSU, and Latino agriculture education programs offered through Wenatchee Valley College. Contact 509.682.6600 to find out more.</p>
+    </div>
+    <div class="ad" id="ad_26">
+<p><em>Early Childhood Education</em></p>
+<p>Certificate (four-quarter) and degree (seven-quarter) training programs start this fall at Wenatchee Valley College in Wenatchee or Omak. Contact Eva at 509.682.6633.</p>
+    </div>
+    <div class="ad" id="ad_27">
+<p><em>Sleeping Lady Mountain Retreat</em></p>
+<p><em>Guest Services</em></p>
+<p><em>Representative</em></p>
+<p>Customer service oriented person needed for food service.</p>
+<p>Responsibilities will include setting up and breaking down group breaks and dining room service. Ability to work days and weekends required. Base pay, and two gratuity programs. Benefits after 90-days full-time employment. We are a smoke and drug free employer. Employment applications available at 7375 Icicle Road. 509-548-6344.</p>
+    </div>
+    <div class="ad" id="ad_28">
+<p><em>The Cheesemongers Shop</em> is looking for an energetic, fun salesperson, 18+ weekends a must. Apply 633 Front Street, Leavenworth.</p>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>

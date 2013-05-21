@@ -1,0 +1,89 @@
+#flag {
+  visibility:hidden;
+  height:0px;
+  overflow:hidden;
+}
+
+/* Story Area Items */
+#content {
+  width:500px;
+  padding:5px;
+  padding-top:10px;
+  background-color:<?=$THEME->content_area_bcolor;?>;
+}
+p {
+  color:<?=$THEME->story_color;?>;
+  font-size: 12px;
+  line-height: 16px;
+  text-align:justify;
+  font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular;
+  margin-top:0px;
+}
+
+/* NAV Bar Setup */
+#vertnav {
+  visibility:hidden;
+  width:0px;
+  overflow:hidden;
+}
+#vertnav ul {
+  visibility:hidden;
+  width:0px;
+  overflow:hidden;
+}
+#vertnav a {
+  visibility:hidden;
+  width:0px;
+  overflow:hidden;
+}
+
+/* Sidebar items */
+#poll {
+  visibility:hidden;
+  width:0px;
+  overflow:hidden;
+}
+
+/* Photo items */
+.photoby {
+  text-align:right;
+  color:<?=$THEME->photoby_color;?>;
+  font-size:9px;
+  line-height:9px;
+  margin-right:0;
+  font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular;
+  text-transform:capitalize;
+  margin-bottom:5px;
+}
+.cutline {
+  color:<?=$THEME->cutline_color;?>;
+  font-size: 10px;
+  line-height: 11px;
+  text-transform:capitalize;
+  /* text-transform:uppercase; */
+  margin-bottom:5px;
+  padding-bottom:10px;
+  /* border-bottom: 1px solid; */
+  font-family: Arial, Helvetica, Geneva, Swiss, SunSans-Regular;
+}
+
+/* Table controls */
+.masterArea {
+  width:800px;
+}
+.topCol {
+  background-color:#fff;
+  visibility:hidden;
+  height:0px;
+}
+.leftCol {
+  visibility:hidden;
+  width:0px;
+}
+.rightCol {
+  visibility:hidden;
+  width:0px;
+}
+.midCol {
+ width:100%;
+}

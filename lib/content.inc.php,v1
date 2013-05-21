@@ -1,0 +1,112 @@
+<?php
+// include('database.php.inc');
+
+// Get a database connection
+  // actually, the database.php will make its own connection
+  $db_conn = db_connect();
+ 
+  // template files
+  $news_template = "templates/news_content_template.inc";
+  $nav_template = "templates/nav_bar_generated_template.inc";
+
+function retrieve_content($section,$number) {
+  global $news_template,$db_conn;
+
+  if(!$section) {
+    $section = 1;
+  }
+
+  if(!$number) {
+    $number = 1;
+  }
+
+  $num_of_items = $number;
+ 
+  $switchsql = "SELECT article_id, hasPhoto
+                  FROM lw_articles
+                 WHERE section_id='$section'
+                   AND isActive=1
+              ORDER BY date_stamp DESC
+                 LIMIT $num_of_items";
+
+
+  $switchresults = db_query($db_conn,$switchsql); 
+  $dataswitch = array_shift($switchresults);
+  $article = $dataswitch[0];
+  $switch = $dataswitch[1];
+  
+  if((int) $switch == 1)  {
+    $sql = "SELECT a.title, a.subtitle, a.body,
+                   b.real_name as byline, b.title as authortitle,
+                   c.path, c.cutline, c.width, c.height,
+                   d.real_name as photoby
+              FROM lw_articles as a, lw_user as b, lw_webphoto as c,
+                   lw_user as d
+             WHERE a.author_id=b.user_id
+               AND a.article_id=c.article_id
+               AND a.article_id=$article
+               AND c.photoby=d.user_id
+               AND a.section_id='$section'
+               AND a.isActive=1
+               AND c.isActive=1
+          ORDER BY a.date_stamp
+             LIMIT $num_of_items";
+  } else {
+    $sql = "SELECT a.title, a.subtitle, a.body,
+                   b.real_name as byline, b.title as authortitle
+              FROM lw_articles as a, lw_user as b
+             WHERE a.author_id=b.user_id
+               AND a.article_id=$article
+               AND a.section_id='$section'
+               AND a.isActive=1
+          ORDER BY a.date_stamp
+             LIMIT $num_of_items";
+  }
+
+  $results = db_query($db_conn,$sql); 
+
+  while($results) {
+    $data = array_shift($results);
+    $title = $data[0]; 
+    $subtitle = $data[1]; 
+    $body = $data[2]; 
+    $author = $data[3];
+    $authortitle = $data[4];
+    $path = $data[5];
+    $cutline = $data[6];
+    $width = $data[7];
+    $height = $data[8];
+    $photoby = $data[9];
+    include($news_template);
+  } 
+}
+
+function retrieve_articles($section,$number) {
+  global $news_template, $db_conn;
+  
+  
+}
+
+function generate_nav() {
+  global $nav_template, $db_conn;
+  
+  $sql = "SELECT distinct(title),
+                 section_id,
+                 shortdesc
+            FROM lw_section
+           WHERE isactive=1";
+
+  $results = db_query($db_conn,$sql); 
+
+  while($results) {
+    $data = array_shift($results);
+    $section = $data[0]; 
+    $sectionid = $data[1];
+    $shortdesc = $data[2];
+    include($nav_template);
+  } 
+
+}
+
+?>
+
